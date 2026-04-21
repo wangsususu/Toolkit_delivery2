@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文具搜索 | 文具空间</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 复用原有主题配色和基础样式 */
+        :root {
+            --primary-blue: #ABBBD1;    /* 主蓝色 */
+            --light-blue: #DCECED;       /* 浅蓝色 */
+            --cream: #FEFDF8;           /* 奶油色 */
+            --text-dark: #333333;       /* 深灰文字 */
+            --text-light: #666666;      /* 浅灰文字 */
+            --white: #FFFFFF;           /* 白色 */
+            --border-color: #E0E0E0;   /* 边框色 */
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #94A8C4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+        
+        /* 顶部栏 */
+        .top-bar {
+            background-color: var(--white);
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-links a {
+            margin-right: 20px;
+            color: var(--text-light);
+        }
+        
+        .top-links a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .top-links a:last-child {
+            margin-right: 0;
+        }
+        
+        /* 导航栏 */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            color: var(--primary-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .nav-icons a {
+            color: var(--text-dark);
+        }
+        
+        .nav-icons a:hover {
+            color: var(--primary-blue);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+        
+        /* 搜索区域样式 */
+        .search-section {
+            padding: 60px 0;
+            background-color: var(--white);
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .search-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .search-title h2 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .search-title p {
+            color: var(--text-light);
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .search-input {
+            flex: 1;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        .category-select {
+            padding: 12px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background-color: var(--white);
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        
+        .category-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+        
+        /* 搜索结果区域 */
+        .search-results {
+            padding: 40px 0;
+        }
+        
+        .results-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .result-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .result-img {
+            height: 180px;
+            background-color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+        }
+        
+        .result-info {
+            padding: 20px;
+        }
+        
+        .result-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .result-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .result-price {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            opacity: 0.7;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #2C3E50;
+            color: var(--white);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--light-blue);
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--light-blue);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links, .nav-icons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .search-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-input, .category-select {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-links">
+                <a href="#"><i class="fas fa-phone"></i> 400-123-4567</a>
+                <a href="#"><i class="fas fa-envelope"></i> contact@stationery.com</a>
+            </div>
+            <div class="top-links">
+                <a href="#"><i class="fas fa-truck"></i> 全场满99元包邮</a>
+                <a href="signin.html"><i class="fas fa-user"></i> 登录/注册</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="home.html" class="logo">
+                    <i class="fas fa-pen-fancy"></i>
+                    <span>文具空间</span>
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="home.html">首页</a></li>
+                    <li><a href="#">商品分类</a></li>
+                    <li><a href="#">新品上市</a></li>
+                    <li><a href="#">热销推荐</a></li>
+                    <li><a href="#">品牌故事</a></li>
+                    <li><a href="seller.html">卖家中心</a></li>
+                </ul>
+                
+                <div class="nav-icons">
+                    <a href="search.html" class="active"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-heart"></i></a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 搜索区域 -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-title">
+                <h2>文具搜索</h2>
+                <p>按分类或关键词查找您需要的文具</p>
+            </div>
+            
+            <form class="search-form" id="searchForm">
+                <input type="text" class="search-input" placeholder="输入关键词（如：凝胶笔、笔记本）" id="searchKeyword">
+                <select class="category-select" id="categoryFilter">
+                    <option value="all">全部分类</option>
+                    <option value="writing">书写工具</option>
+                    <option value="paper">纸张与记事本</option>
+                    <option value="storage">收纳整理</option>
+                    <option value="office">办公用品</option>
+                    <option value="accessories">替换装与配件</option>
+                    <option value="creative">创意与美术</option>
+                </select>
+                <button type="submit" class="btn">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 搜索结果区域 -->
+    <section class="search-results">
+        <div class="container">
+            <h3 class="results-title" id="resultsTitle">搜索结果</h3>
+            <div class="results-grid" id="resultsContainer">
+                <!-- 初始无结果提示 -->
+                <div class="no-results" id="noResults">
+                    <i class="fas fa-box-open"></i>
+                    <p>输入关键词并选择分类，开始搜索文具</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>文具空间</h3>
+                    <p>高品质文具专卖店，为您提供创意与实用的完美结合。</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="home.html">首页</a></li>
+                        <li><a href="#">所有商品</a></li>
+                        <li><a href="#">新品上市</a></li>
+                        <li><a href="#">热销推荐</a></li>
+                        <li><a href="seller.html">卖家中心</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>客户服务</h3>
+                    <ul>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">配送政策</a></li>
+                        <li><a href="#">退换货政策</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>联系我们</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区文具大道123号</li>
+                        <li><i class="fas fa-phone"></i> 400-123-4567</li>
+                        <li><i class="fas fa-envelope"></i> contact@stationery.com</li>
+                        <li><i class="fas fa-clock"></i> 周一至周五 9:00-18:00</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 文具空间. 保留所有权利. | 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const navIcons = document.querySelector('.nav-icons');
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+                navIcons.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navIcons.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.backgroundColor = 'var(--white)';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                
+                navIcons.style.position = 'absolute';
+                navIcons.style.top = 'calc(100% + 200px)';
+                navIcons.style.left = '0';
+                navIcons.style.width = '100%';
+                navIcons.style.justifyContent = 'center';
+                navIcons.style.backgroundColor = 'var(--white)';
+                navIcons.style.padding = '20px';
+            }
+        });
+
+        // 搜索功能实现
+        const searchForm = document.getElementById('searchForm');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const noResults = document.getElementById('noResults');
+        const resultsTitle = document.getElementById('resultsTitle');
+
+        // 模拟文具数据
+        const stationeryData = [
+            { name: '顺滑凝胶笔套装', category: 'writing', desc: '0.5mm笔尖，顺滑书写不断墨，10色可选', price: '¥ 29.90', icon: 'fas fa-pen-nib' },
+            { name: '软线圈笔记本', category: 'paper', desc: 'A5尺寸，80页，四种内页格式可选', price: '¥ 25.00', icon: 'fas fa-book-open' },
+            { name: '无屑橡皮擦', category: 'accessories', desc: '高效清洁，不留痕迹，3个装', price: '¥ 12.00', icon: 'fas fa-eraser' },
+            { name: '索引彩色便签', category: 'paper', desc: '5色组合，可书写表面，80张/本', price: '¥ 15.50', icon: 'fas fa-tags' },
+            { name: '便携式剪刀', category: 'office', desc: '安全设计，锋利耐用，附带保护套', price: '¥ 18.00', icon: 'fas fa-cut' },
+            { name: '双头荧光笔', category: 'writing', desc: '细头+粗头设计，6种柔和颜色', price: '¥ 22.00', icon: 'fas fa-highlighter' },
+            { name: '多层文件收纳盒', category: 'storage', desc: '桌面整理，5层设计，可拆卸组装', price: '¥ 49.90', icon: 'fas fa-box' },
+            { name: '水彩颜料套装', category: 'creative', desc: '24色水彩，含画笔和调色盘', price: '¥ 89.00', icon: 'fas fa-palette' }
+        ];
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('searchKeyword').value.toLowerCase().trim();
+            const category = document.getElementById('categoryFilter').value;
+            
+            // 筛选数据
+            const filteredResults = stationeryData.filter(item => {
+                const matchKeyword = keyword === '' || item.name.toLowerCase().includes(keyword) || item.desc.toLowerCase().includes(keyword);
+                const matchCategory = category === 'all' || item.category === category;
+                return matchKeyword && matchCategory;
+            });
+
+            // 更新结果展示
+            resultsContainer.innerHTML = '';
+            if (filteredResults.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>未找到匹配的文具，请尝试其他关键词或分类</p>
+                    </div>
+                `;
+                resultsTitle.textContent = '搜索结果 (0)';
+            } else {
+                resultsTitle.textContent = `搜索结果 (${filteredResults.length})`;
+                filteredResults.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
+                    card.innerHTML = `
+                        <div class="result-img">
+                            <i class="${item.icon}"></i>
+                        </div>
+                        <div class="result-info">
+                            <h3>${item.name}</h3>
+                            <p>${item.desc}</p>
+                            <div class="result-price">${item.price}</div>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(card);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
