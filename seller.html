@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>卖家中心 | 文具空间</title>
+    <title>Seller Center | Stationery Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 复用原有主题配色和基础样式 */
+        /* Reuse original theme color scheme and basic styles */
         :root {
-            --primary-blue: #ABBBD1;    /* 主蓝色 */
-            --light-blue: #DCECED;       /* 浅蓝色 */
-            --cream: #FEFDF8;           /* 奶油色 */
-            --text-dark: #333333;       /* 深灰文字 */
-            --text-light: #666666;      /* 浅灰文字 */
-            --white: #FFFFFF;           /* 白色 */
-            --border-color: #E0E0E0;   /* 边框色 */
+            --primary-blue: #ABBBD1;    /* Primary blue */
+            --light-blue: #DCECED;       /* Light blue */
+            --cream: #FEFDF8;           /* Cream color */
+            --text-dark: #333333;       /* Dark gray text */
+            --text-light: #666666;      /* Light gray text */
+            --white: #FFFFFF;           /* White */
+            --border-color: #E0E0E0;   /* Border color */
             --shadow: rgba(0, 0, 0, 0.08);
         }
         
@@ -76,7 +76,7 @@
             color: var(--white);
         }
         
-        /* 顶部栏 */
+        /* Top bar */
         .top-bar {
             background-color: var(--white);
             padding: 8px 0;
@@ -103,7 +103,7 @@
             margin-right: 0;
         }
         
-        /* 导航栏 */
+        /* Navigation bar */
         header {
             background-color: var(--white);
             box-shadow: 0 2px 10px var(--shadow);
@@ -181,7 +181,7 @@
             color: var(--text-dark);
         }
         
-        /* 卖家中心样式 */
+        /* Seller center styles */
         .seller-section {
             padding: 60px 0;
         }
@@ -268,7 +268,7 @@
             color: var(--primary-blue);
         }
         
-        /* 页脚 */
+        /* Footer */
         footer {
             background-color: #2C3E50;
             color: var(--white);
@@ -327,7 +327,7 @@
             font-size: 0.9rem;
         }
         
-        /* 响应式设计 */
+        /* Responsive design */
         @media (max-width: 768px) {
             .nav-links, .nav-icons {
                 display: none;
@@ -354,7 +354,7 @@
     </style>
 </head>
 <body>
-    <!-- 顶部栏 -->
+    <!-- Top bar -->
     <div class="top-bar">
         <div class="container">
             <div class="top-links">
@@ -362,32 +362,29 @@
                 <a href="#"><i class="fas fa-envelope"></i> contact@stationery.com</a>
             </div>
             <div class="top-links">
-                <a href="#"><i class="fas fa-truck"></i> 全场满99元包邮</a>
-                <a href="signin.html"><i class="fas fa-user"></i> 登录/注册</a>
+                <a href="#"><i class="fas fa-truck"></i> Free Shipping Over $99</a>
             </div>
         </div>
     </div>
 
-    <!-- 导航栏 -->
+    <!-- Navigation bar -->
     <header>
         <div class="container">
             <nav>
                 <a href="home.html" class="logo">
                     <i class="fas fa-pen-fancy"></i>
-                    <span>文具空间</span>
+                    <span>Stationery Hub</span>
                 </a>
                 
                 <ul class="nav-links">
-                    <li><a href="home.html">首页</a></li>
-                    <li><a href="#">商品分类</a></li>
-                    <li><a href="#">新品上市</a></li>
-                    <li><a href="#">热销推荐</a></li>
-                    <li><a href="#">品牌故事</a></li>
-                    <li><a href="seller.html" class="active">卖家中心</a></li>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="seller.html" class="active">Seller</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="register.html">Register</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
                 
                 <div class="nav-icons">
-                    <a href="search.html"><i class="fas fa-search"></i></a>
                     <a href="#"><i class="fas fa-heart"></i></a>
                     <a href="#"><i class="fas fa-shopping-cart"></i></a>
                 </div>
@@ -399,63 +396,63 @@
         </div>
     </header>
 
-    <!-- 卖家中心区域 -->
+    <!-- Seller center area -->
     <section class="seller-section">
         <div class="container">
             <div class="seller-title">
-                <h2>卖家中心</h2>
-                <p>管理您的文具店铺，发布商品广告，拓展销售渠道</p>
+                <h2>Seller Center</h2>
+                <p>Manage your stationery store, publish product ads, expand sales channels</p>
             </div>
             
             <div class="seller-cards">
-                <!-- 卖家注册 -->
+                <!-- Seller Registration -->
                 <div class="seller-card">
                     <div class="seller-icon">
                         <i class="fas fa-user-plus"></i>
                     </div>
-                    <h3>卖家注册</h3>
-                    <p>成为文具空间认证卖家，开启您的文具销售之旅。填写店铺信息、资质认证，快速完成注册。</p>
-                    <a href="#" class="btn">立即注册</a>
+                    <h3>Seller Registration</h3>
+                    <p>Become a certified seller of Stationery Hub and start your stationery sales journey. Fill in store information and complete qualification verification.</p>
+                    <a href="register.html" class="btn">Register Now</a>
                 </div>
                 
-                <!-- 卖家登录 -->
+                <!-- Seller Login -->
                 <div class="seller-card">
                     <div class="seller-icon">
                         <i class="fas fa-sign-in-alt"></i>
                     </div>
-                    <h3>卖家登录</h3>
-                    <p>登录您的卖家账户，管理商品、查看订单、处理售后，一站式操作平台。</p>
-                    <a href="#" class="btn">账户登录</a>
+                    <h3>Seller Login</h3>
+                    <p>Log in to your seller account to manage products, view orders, handle after-sales service, all-in-one operating platform.</p>
+                    <a href="login.html" class="btn">Account Login</a>
                 </div>
                 
-                <!-- 添加文具 -->
+                <!-- Add Stationery -->
                 <div class="seller-card">
                     <div class="seller-icon">
                         <i class="fas fa-plus-circle"></i>
                     </div>
-                    <h3>添加文具</h3>
-                    <p>发布新的文具商品，上传商品图片、填写详细信息、设置价格和库存，轻松推广您的产品。</p>
-                    <a href="#" class="btn btn-secondary">添加商品</a>
+                    <h3>Add Stationery</h3>
+                    <p>Publish new stationery products, upload images, fill in details, set prices and stock, promote your products easily.</p>
+                    <a href="#" class="btn btn-secondary">Add Product</a>
                 </div>
             </div>
             
             <div class="seller-note">
-                <h4><i class="fas fa-info-circle"></i> 卖家须知</h4>
-                <p>1. 所有卖家需完成实名认证和店铺资质审核，确保商品质量和服务水平；<br>
-                   2. 发布的文具商品需符合平台规范，禁止销售假冒伪劣产品；<br>
-                   3. 平台将根据销售数据和用户评价，提供店铺推广和优化建议；<br>
-                   4. 如有任何问题，请联系卖家支持：seller@stationery.com。</p>
+                <h4><i class="fas fa-info-circle"></i> Seller Guidelines</h4>
+                <p>1. All sellers must complete real-name authentication and store qualification review to ensure product quality and service level;<br>
+                   2. Published stationery must comply with platform regulations, counterfeit and shoddy products are prohibited;<br>
+                   3. The platform will provide store promotion and optimization suggestions based on sales data and user reviews;<br>
+                   4. For any questions, please contact seller support: seller@stationery.com.</p>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <h3>文具空间</h3>
-                    <p>高品质文具专卖店，为您提供创意与实用的完美结合。</p>
+                    <h3>Stationery Hub</h3>
+                    <p>High-quality stationery store, combining creativity and practicality for you.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-weixin"></i></a>
                         <a href="#"><i class="fab fa-weibo"></i></a>
@@ -465,46 +462,46 @@
                 </div>
                 
                 <div class="footer-col">
-                    <h3>快速链接</h3>
+                    <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="home.html">首页</a></li>
-                        <li><a href="#">所有商品</a></li>
-                        <li><a href="#">新品上市</a></li>
-                        <li><a href="#">热销推荐</a></li>
-                        <li><a href="seller.html">卖家中心</a></li>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="#">All Products</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="seller.html">Seller Center</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h3>客户服务</h3>
+                    <h3>Customer Service</h3>
                     <ul>
-                        <li><a href="#">常见问题</a></li>
-                        <li><a href="#">配送政策</a></li>
-                        <li><a href="#">退换货政策</a></li>
-                        <li><a href="#">隐私政策</a></li>
-                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h3>联系我们</h3>
+                    <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> 北京市海淀区文具大道123号</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Stationery Avenue, Haidian District, Beijing</li>
                         <li><i class="fas fa-phone"></i> 400-123-4567</li>
                         <li><i class="fas fa-envelope"></i> contact@stationery.com</li>
-                        <li><i class="fas fa-clock"></i> 周一至周五 9:00-18:00</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri 9:00-18:00</li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026 文具空间. 保留所有权利. | 京ICP备12345678号</p>
+                <p>&copy; 2026 Stationery Hub. All Rights Reserved. | Jing ICP No.12345678</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // 移动端菜单切换
+        // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             const navLinks = document.querySelector('.nav-links');
             const navIcons = document.querySelector('.nav-icons');
@@ -534,7 +531,7 @@
             }
         });
 
-        // 导航链接激活状态
+        // Navigation link active state
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {
                 document.querySelectorAll('.nav-links a').forEach(item => {
