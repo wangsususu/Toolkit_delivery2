@@ -120,16 +120,14 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-blue);
             display: flex;
             align-items: center;
         }
         
-        .logo i {
-            margin-right: 8px;
-            color: var(--primary-blue);
+        .logo-img {
+            width: 60px; 
+            height: auto; 
+            object-fit: contain;
         }
         
         .nav-links {
@@ -399,6 +397,10 @@
                 width: 100%;
                 max-width: 100%;
             }
+            
+            .logo-img {
+                width: 50px;
+            }
         }
         
         @media (max-width: 576px) {
@@ -408,6 +410,10 @@
             
             .footer-content {
                 grid-template-columns: 1fr;
+            }
+            
+            .logo-img {
+                width: 45px;
             }
         }
     </style>
@@ -431,8 +437,8 @@
         <div class="container">
             <nav>
                 <a href="home.html" class="logo">
-                    <i class="fas fa-pen-fancy"></i>
-                    <span>Stationery Hub</span>
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/8d9fc5e6ed124591ad22784046d47057.png~tplv-a9rns2rl98-24:720:720.png?lk3s=8e244e95&rcl=2026042108505381CD93A01D434C3F0012&rrcfp=8a172a1a&x-expires=1777337453&x-signature=pe3S%2BIMIvIYziZBb45G41VmaBiM%3D" 
+                         alt="Logo" class="logo-img">
                 </a>
                 
                 <ul class="nav-links">
